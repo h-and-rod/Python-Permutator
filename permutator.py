@@ -4,35 +4,34 @@ def fatorate(n):
   else:
     return n * fatorate(n - 1)
   
-def simple_permutation(word):
+def permutate(word):
   letters_set = set()
+  letters_repetition_dict = {}
+
   for i in word:
     letters_set.add(i)
+    try:
+      letters_repetition_dict[f"{i}"] += 1
+    except KeyError:
+      letters_repetition_dict[f"{i}"] = 0
+
   number_of_letters = len(letters_set)
-  n = fatorate(number_of_letters)
-  return n
 
-def permutation_with_reps(word):
-  simple_result = simple_permutation(word)
+  k = 1
   
+  for i in letters_repetition_dict.values():
+    if i != 0:
+      number_of_letters += 1
+    k *= fatorate(i+1)
+  
+  n = fatorate(number_of_letters)
+  
+  if k != 0:
+    permutation_result = int(n/k)
+  else: 
+    permutation_result = n
+  
+  return permutation_result
 
-
-word = input("Digite uma palavra que nao contenha caracteres repetidos: ")
-print(f'\nA palavra "{word}" pode ser permutada em {simple_permutation(word)} possibilidades.\n')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# permutation_counter = fatorate(len(permutation(word)))
-
-# print(permutation(word))
+word = input("Digite uma sequência de caracteres alfanuméricos para calcular o número de arranjos possiveis: ")
+print(f'\n"{word}" pode ser organizada de {permutate(word)} formas diferentes.\n')
