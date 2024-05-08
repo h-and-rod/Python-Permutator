@@ -12,7 +12,8 @@ def simple_permutation(word):
   n = fatorate(number_of_letters)
   return n
 
-def subs_permutation:
+def permutation_with_reps(word):
+  simple_result = simple_permutation(word)
   
 
 
